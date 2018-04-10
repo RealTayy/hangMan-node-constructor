@@ -30,6 +30,11 @@ function Word(word) {
         });
     }
 
+    // Checks to see if word contains a certain letter or not
+    this.hasLetter = function(letter) {
+        return this.word.toLowerCase().includes(letter.toLowerCase());
+    }
+
     // Print function for ez concatination <-- Probably spelled that wrong but WHATEVER FIGHT ME IF YOU GOT A PROBLEM BRUH
     this.toString = function () {
         var display = '';
