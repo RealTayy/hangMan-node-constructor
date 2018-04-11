@@ -2,7 +2,7 @@ var Word = require('./Word.js');
 var inquirer = require('inquirer');
 
 var wordBank = {
-    words: ['zero', 'one', 'two'],
+    words: ['There is no cow level', 'These are not the droids you are looking for', 'I love lamp', 'Hold my beer', ],
     getWord() {
         var randomIndex = Math.floor(Math.random() * this.words.length);
         return this.words[randomIndex];
@@ -15,7 +15,7 @@ function hangManGame() {
     this.hasLost = false;
     this.curIncorrect = 0;
     this.maxIncorrect = 8;
-    this.lettersGuessed = ['a'];
+    this.lettersGuessed = [];
     this.checkWinOrLost = function () {
         if (this.curIncorrect === this.maxIncorrect) this.hasLost = true;
         if (this.curWord.isWordGuessed()) this.hasWon = true;
