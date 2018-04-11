@@ -1,10 +1,16 @@
 var Word = require('./Word.js');
 var inquirer = require('inquirer');
 
-var wordBank = ['zero', 'one', 'two'];
+var wordBank = {
+    words: ['zero', 'one', 'two'],
+    getWord() {
+        var randomIndex = Math.floor(Math.random() * this.words.length);
+        return this.words[randomIndex];
+    }
+}
 
 function hangManGame() {
-    this.curWord = new Word(getWord());
+    this.curWord = new Word(wordBank.getWord());
     this.hasWon = false;
     this.hasLost = false;
     this.curIncorrect = 0;
@@ -18,6 +24,14 @@ function hangManGame() {
         console.log('\n' + this.curWord);
         console.log('Incorrect guesses remaining: ' + (this.maxIncorrect - this.curIncorrect));
         this.queryPlayerGuess();
+    }
+    this.runVictory = function () {
+        console.log('WOWZA! You did it you won! The correct word was \'' + this.curWord.word + '\'')
+        this.queryPlayAgain();
+    }
+    this.runLose = function () {
+        console.log('OH NO! You lost :< This doesn\'t mean you aren\'t a smart person okay?')
+        this.queryPlayAgain();
     }
     this.queryPlayerGuess = function () {
         var that = this;
@@ -44,24 +58,30 @@ function hangManGame() {
                 that.curIncorrect++;
             };
             that.checkWinOrLost();
-            that.playRound();
+            if (that.hasWon) that.runVictory();
+            else if (that.hasLost) that.runLose();
+            else that.playRound();
         });
     }
+    this.queryPlayAgain = function () {
+        var that = this;
+        inquirer.prompt([
+            {
+                type: 'confirm',
+                name: 'wantsToPlay',
+                message: 'Would you like to play again?'
+            }
+        ]).then(function (answers) {
+            if (answers.wantsToPlay) startNewGame();
+            else console.log("Alright..! Thanks for playing!");
+        })
+    }
 
-}
-
-function getWord() {
-    var randomIndex = Math.floor(Math.random() * wordBank.length);
-    return wordBank[randomIndex];
 }
 
 function startNewGame() {
     var curGame = new hangManGame();
     curGame.playRound()
-}
-
-function finishGame() {
-
 }
 
 startNewGame();

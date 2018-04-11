@@ -14,7 +14,7 @@ function Letter(letter) {
         else this.isGuessed = false ;
     }
 
-    // If letter is a empty space then sets its isGuessed value to true automatically
+    // If letter is a space then sets its isGuessed value to true automatically
     if (this.letter === ' ') this.isGuessed = true;
     
     // Print function for ez concatination <-- Probably spelled that wrong but WHATEVER FIGHT ME IF YOU GOT A PROBLEM BRUH    

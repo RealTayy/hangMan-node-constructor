@@ -1,5 +1,5 @@
 {
-  "name": "hangMan-node-constructor",
+  "name": "hangman-node-constructor",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,5 +19,6 @@
   "homepage": "https://github.com/RealTayy/hangMan-node-constructor#readme",
   "dependencies": {
     "inquirer": "^5.2.0"
-  }
+  },
+  "devDependencies": {}
 }
